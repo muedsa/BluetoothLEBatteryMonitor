@@ -52,9 +52,9 @@ namespace BluetoothLEBatteryMonitor
 
         private void UpdateIcon()
         {
+            UpdateDeviceList();
             if (this.Hwid != null)
             {
-                UpdateDeviceList();
                 BLEDevice device = this.Devices.Find(i => i.Hwid.Equals(this.Hwid));
                 if (device != null)
                 {
