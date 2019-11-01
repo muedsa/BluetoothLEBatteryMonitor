@@ -20,11 +20,5 @@ namespace BluetoothLEBatteryMonitor
             DeviceService.AddDeviceInfo(Guid.Parse(UUID1), list);
             return list;
         }
-
-/*        public static BLEDevice GetBLEDevice(string hwid)
-        {
-            List<BLEDevice> list = GetBLEDeviceList();
-            return list.Find(device => device.Hwid.Equals(hwid));
-        }*/
     }
 }
