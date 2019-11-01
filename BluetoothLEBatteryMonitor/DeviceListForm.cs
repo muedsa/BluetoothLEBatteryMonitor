@@ -42,6 +42,16 @@ namespace BluetoothLEBatteryMonitor
                 this.DeviceListView.EndUpdate();
             }
         }
+
+        private void DeviceListView_SizeChanged(object sender, EventArgs e)
+        {
+            int width = this.DeviceListView.Width / 4;
+            foreach (ColumnHeader column in this.DeviceListView.Columns)
+            {
+                column.Width = width;
+            }
+        }
+
         private void DeviceListView_SelectedIndexChanged(object sender, EventArgs e)
         {
             this.Hwid = this.Devices[this.DeviceListView.SelectedItems[0].Index].Hwid;

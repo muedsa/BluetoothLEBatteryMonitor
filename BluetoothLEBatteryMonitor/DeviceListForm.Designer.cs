@@ -37,15 +37,19 @@
             // 
             // DeviceListView
             // 
+            this.DeviceListView.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.DeviceListView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DeviceListView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.DeviceListView.HideSelection = false;
             this.DeviceListView.Location = new System.Drawing.Point(0, 0);
+            this.DeviceListView.MultiSelect = false;
             this.DeviceListView.Name = "DeviceListView";
             this.DeviceListView.Size = new System.Drawing.Size(284, 361);
             this.DeviceListView.TabIndex = 0;
             this.DeviceListView.UseCompatibleStateImageBehavior = false;
             this.DeviceListView.View = System.Windows.Forms.View.Details;
             this.DeviceListView.SelectedIndexChanged += new System.EventHandler(this.DeviceListView_SelectedIndexChanged);
+            this.DeviceListView.SizeChanged += new System.EventHandler(this.DeviceListView_SizeChanged);
             // 
             // NotifyIcon
             // 
