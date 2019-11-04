@@ -19,7 +19,7 @@ namespace BluetoothLEBatteryMonitor
             this.DeviceListView.Columns.Add("设备", width);
             this.DeviceListView.Columns.Add("状态", width);
             this.DeviceListView.Columns.Add("电量", width);
-            this.DeviceListView.Columns.Add("Hwid", width);
+            this.DeviceListView.Columns.Add("Hardware ID", width);
             UpdateDeviceList();
         }
 
@@ -32,10 +32,12 @@ namespace BluetoothLEBatteryMonitor
                 this.DeviceListView.Items.Clear();
                 foreach (BLEDevice device in this.Devices)
                 {
-                    ListViewItem listViewItem = new ListViewItem();
-                    listViewItem.Text = device.Name;
-                    listViewItem.SubItems.Add(device.Status? "connect":"disconnect");
-                    listViewItem.SubItems.Add(device.Battery.ToString());
+                    ListViewItem listViewItem = new ListViewItem
+                    {
+                        Text = device.Name
+                    };
+                    listViewItem.SubItems.Add(device.Status ? "connect" : "disconnect");
+                    listViewItem.SubItems.Add(String.Format("{0}%", device.Battery));
                     listViewItem.SubItems.Add(device.Hwid);
                     this.DeviceListView.Items.Add(listViewItem);
                 }
@@ -65,7 +67,7 @@ namespace BluetoothLEBatteryMonitor
             UpdateDeviceList();
             if (this.Hwid != null)
             {
-                BLEDevice device = this.Devices.Find(i => i.Hwid.Equals(this.Hwid));
+                BLEDevice device = this.Devices.Find(i => i.Hwid.Equals(Hwid));
                 if (device != null)
                 {
                     ChangeIcon(device.Name, device.Status, device.Battery);
@@ -100,7 +102,7 @@ namespace BluetoothLEBatteryMonitor
                 {
                     this.NotifyIcon.Icon = BluetoothLEBatteryMonitor.Properties.Resources.Icon_Battery_Empty;
                 }
-                this.NotifyIcon.Text = String.Format("{0} {1}%\nBluetooth Battery Monitor", name, battery);
+                this.NotifyIcon.Text = String.Format("{0} {1}%\n{2} Update", name, battery, DateTime.Now.ToString());
                 
             }
             else

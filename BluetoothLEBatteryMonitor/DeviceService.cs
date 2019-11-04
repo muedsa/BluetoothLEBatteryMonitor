@@ -62,9 +62,11 @@ namespace BluetoothLEBatteryMonitor
             UInt64 ulPropertyType = new UInt64();
             Int32 dwSize = 4;
             byte[] devst = new byte[4];
-            SetupAPI.DEVPROPKEY key = new SetupAPI.DEVPROPKEY();
-            key.fmtid = Guid.Parse("{4340a6c5-93fa-4706-972c-7b648008a5a7}");
-            key.pid = 2;
+            SetupAPI.DEVPROPKEY key = new SetupAPI.DEVPROPKEY
+            {
+                fmtid = Guid.Parse("{4340a6c5-93fa-4706-972c-7b648008a5a7}"),
+                pid = 2
+            };
             while (!SetupAPI.SetupDiGetDevicePropertyW(hdi, ref devInfoData, ref key, ref ulPropertyType, devst, dwSize, ref dwSize, 0))
             {
                 int err = Marshal.GetLastWin32Error();
@@ -128,13 +130,13 @@ namespace BluetoothLEBatteryMonitor
                 int hr = BluetoothAPIs.BluetoothGATTGetCharacteristics(hDevice, ref service, 0, IntPtr.Zero, ref characteristicsBufferCount, BluetoothAPIs.BLUETOOTH_GATT_FLAG_NONE);
                 IntPtr characteristicsBufferPtr = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(BluetoothAPIs.BTH_LE_GATT_CHARACTERISTIC)) * characteristicsBufferCount);
                 UInt16 characteristicsBufferActual = 0;
-                BluetoothAPIs.BluetoothGATTGetCharacteristics(hDevice, ref service, characteristicsBufferCount, characteristicsBufferPtr, ref characteristicsBufferActual, !device.Status ? BluetoothAPIs.BLUETOOTH_GATT_FLAG_NONE : BluetoothAPIs.BLUETOOTH_GATT_FLAG_FORCE_READ_FROM_DEVICE);
+                BluetoothAPIs.BluetoothGATTGetCharacteristics(hDevice, ref service, characteristicsBufferCount, characteristicsBufferPtr, ref characteristicsBufferActual, BluetoothAPIs.BLUETOOTH_GATT_FLAG_NONE);
                 for (int n = 0; n < characteristicsBufferActual; n++)
                 {
                     BluetoothAPIs.BTH_LE_GATT_CHARACTERISTIC characteristic = Marshal.PtrToStructure<BluetoothAPIs.BTH_LE_GATT_CHARACTERISTIC>(characteristicsBufferPtr + n * Marshal.SizeOf(typeof(BluetoothAPIs.BTH_LE_GATT_CHARACTERISTIC)));
                     BluetoothAPIs.BTH_LE_GATT_CHARACTERISTIC_VALUE characteristicValue = new BluetoothAPIs.BTH_LE_GATT_CHARACTERISTIC_VALUE();
                     UInt16 characteristicValueSizeRequired = 0;
-                    BluetoothAPIs.BluetoothGATTGetCharacteristicValue(hDevice, ref characteristic, 256, ref characteristicValue, out characteristicValueSizeRequired, !device.Status ? BluetoothAPIs.BLUETOOTH_GATT_FLAG_NONE : BluetoothAPIs.BLUETOOTH_GATT_FLAG_FORCE_READ_FROM_DEVICE);
+                    BluetoothAPIs.BluetoothGATTGetCharacteristicValue(hDevice, ref characteristic, 256, ref characteristicValue, out characteristicValueSizeRequired, device.Status ? BluetoothAPIs.BLUETOOTH_GATT_FLAG_FORCE_READ_FROM_DEVICE : BluetoothAPIs.BLUETOOTH_GATT_FLAG_NONE);
                     if (characteristic.CharacteristicUuid.ShortUuid == 0x2A19) // battery level
                     {
                         device.Battery = characteristicValue.Data[0];

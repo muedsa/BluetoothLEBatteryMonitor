@@ -60,7 +60,7 @@
             // 
             // Timer
             // 
-            this.Timer.Interval = 300000;
+            this.Timer.Interval = 120000;
             this.Timer.Tick += new System.EventHandler(this.Timer_Tick);
             // 
             // DeviceListForm
