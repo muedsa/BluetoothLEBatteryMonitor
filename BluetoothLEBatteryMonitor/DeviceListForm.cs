@@ -13,6 +13,14 @@ namespace BluetoothLEBatteryMonitor
             InitializeComponent();
         }
 
+        private void DeviceListForm_SizeChange(object sender, EventArgs e)
+        {
+            if(this.WindowState == FormWindowState.Minimized)
+            {
+                this.Hide();
+            }
+        }
+
         private void DeviceListForm_Load(object sender, EventArgs e)
         {
             int width = this.DeviceListView.Width / 4;
@@ -121,6 +129,7 @@ namespace BluetoothLEBatteryMonitor
         private void NotifyIcon_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             this.Show();
+            this.WindowState = FormWindowState.Normal;
         }
 
         private void RefreshMenuItem_Click(object sender, EventArgs e)
