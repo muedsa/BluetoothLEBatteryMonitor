@@ -40,6 +40,7 @@
             this.Timer = new System.Windows.Forms.Timer(this.components);
             this.ContextMenuStrip.SuspendLayout();
             this.SuspendLayout();
+            this.SizeChanged += new System.EventHandler(DeviceListForm_SizeChange);
             // 
             // DeviceListView
             // 
