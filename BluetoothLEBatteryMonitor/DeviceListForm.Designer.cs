@@ -40,12 +40,12 @@
             this.Timer = new System.Windows.Forms.Timer(this.components);
             this.ContextMenuStrip.SuspendLayout();
             this.SuspendLayout();
-            this.SizeChanged += new System.EventHandler(DeviceListForm_SizeChange);
             // 
             // DeviceListView
             // 
             this.DeviceListView.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.DeviceListView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DeviceListView.FullRowSelect = true;
             this.DeviceListView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.DeviceListView.HideSelection = false;
             this.DeviceListView.Location = new System.Drawing.Point(0, 0);
@@ -74,19 +74,19 @@
             this.toolStripSeparator1,
             this.exitMenuItem});
             this.ContextMenuStrip.Name = "ContextMenuStrip";
-            this.ContextMenuStrip.Size = new System.Drawing.Size(181, 98);
+            this.ContextMenuStrip.Size = new System.Drawing.Size(121, 76);
             // 
             // refreshMenuItem
             // 
             this.refreshMenuItem.Name = "refreshMenuItem";
-            this.refreshMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.refreshMenuItem.Size = new System.Drawing.Size(120, 22);
             this.refreshMenuItem.Text = "Refresh";
             this.refreshMenuItem.Click += new System.EventHandler(this.RefreshMenuItem_Click);
             // 
             // settingMenuItem
             // 
             this.settingMenuItem.Name = "settingMenuItem";
-            this.settingMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.settingMenuItem.Size = new System.Drawing.Size(120, 22);
             this.settingMenuItem.Text = "Setting";
             this.settingMenuItem.Visible = false;
             this.settingMenuItem.Click += new System.EventHandler(this.SettingMenuItem_Click);
@@ -94,12 +94,12 @@
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(117, 6);
             // 
             // exitMenuItem
             // 
             this.exitMenuItem.Name = "exitMenuItem";
-            this.exitMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exitMenuItem.Size = new System.Drawing.Size(120, 22);
             this.exitMenuItem.Text = "Exit";
             this.exitMenuItem.Click += new System.EventHandler(this.ExitMenuItem_Click);
             // 
@@ -119,6 +119,7 @@
             this.Name = "DeviceListForm";
             this.Text = "DeviceList | BluetoothLE Battery Montior";
             this.Load += new System.EventHandler(this.DeviceListForm_Load);
+            this.SizeChanged += new System.EventHandler(this.DeviceListForm_SizeChange);
             this.ContextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
 
