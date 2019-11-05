@@ -109,7 +109,7 @@ namespace BluetoothLEBatteryMonitor
             {
                 this.NotifyIcon.Icon = BluetoothLEBatteryMonitor.Properties.Resources.Icon_Unlink;
                 this.NotifyIcon.Text = "Device disconnect or no selected\nBluetooth Battery Monitor";
-                MessageBox.Show("Device disconnect or no selected");
+                this.NotifyIcon.ShowBalloonTip(3000, "Warning", "Device disconnect or no selected", ToolTipIcon.Warning);
             }
         }
 
@@ -122,5 +122,22 @@ namespace BluetoothLEBatteryMonitor
         {
             this.Show();
         }
+
+        private void RefreshMenuItem_Click(object sender, EventArgs e)
+        {
+            UpdateIcon();
+        }
+
+        private void SettingMenuItem_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void ExitMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+
     }
 }
