@@ -77,6 +77,7 @@
             this.ClientSize = new System.Drawing.Size(384, 161);
             this.Controls.Add(this.DeviceListView);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "DeviceListForm";
             this.Text = "DeviceList | BluetoothLE Battery Montior";
             this.Load += new System.EventHandler(this.DeviceListForm_Load);
