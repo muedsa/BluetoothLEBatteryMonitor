@@ -48,12 +48,12 @@ namespace BluetoothLEBatteryMonitor.Service
                 Task<GattDeviceServicesResult> batteryServiceTask = selectedBLEDev.GetGattServicesForUuidAsync(BATTERY_UUID, BluetoothCacheMode.Uncached).AsTask();
                 if(batteryServiceTask.Wait(3000))
                 {
-                    if (batteryServiceTask.Result.Status.Equals(GattCommunicationStatus.Success)){
+                    if (GattCommunicationStatus.Success.Equals(batteryServiceTask.Result.Status)){
                         selectGattService = batteryServiceTask.Result.Services[0];
                         Task<GattCharacteristicsResult> gattCharacteristicsTask = selectGattService.GetCharacteristicsForUuidAsync(BATTERY_LEVEL_UUID, BluetoothCacheMode.Uncached).AsTask();
                         if(gattCharacteristicsTask.Wait(300))
                         {
-                            if (gattCharacteristicsTask.Result.Status.Equals(GattCommunicationStatus.Success))
+                            if (GattCommunicationStatus.Success.Equals(gattCharacteristicsTask.Result.Status))
                             {
                                 selectGattCharacteristic = gattCharacteristicsTask.Result.Characteristics[0];
                                 form.Notify("BLE Device ID:" + selectedBLEDev.DeviceId);
@@ -68,12 +68,12 @@ namespace BluetoothLEBatteryMonitor.Service
 
         public int GetBatteryLevel()
         {
-            if(selectGattCharacteristic != null)
+            if(selectGattCharacteristic != null && BluetoothConnectionStatus.Connected.Equals(selectedBLEDev.ConnectionStatus))
             {
                 Task<GattReadResult> gattReadTask = selectGattCharacteristic.ReadValueAsync(BluetoothCacheMode.Uncached).AsTask();
                 if (gattReadTask.Wait(300))
                 {
-                    if (gattReadTask.Result.Status.Equals(GattCommunicationStatus.Success))
+                    if (GattCommunicationStatus.Success.Equals(gattReadTask.Result.Status))
                     {
                         IBuffer buffer = gattReadTask.Result.Value;
                         byte[] data = new byte[buffer.Length];
