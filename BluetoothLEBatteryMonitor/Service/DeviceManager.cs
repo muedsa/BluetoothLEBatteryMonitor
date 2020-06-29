@@ -41,7 +41,7 @@ namespace BluetoothLEBatteryMonitor.Service
         public void SelectDevice(string id, DeviceListForm form)
         {
             Task<BluetoothLEDevice> bleTask = BluetoothLEDevice.FromIdAsync(id).AsTask();
-            if(bleTask.Wait(3000, new CancellationTokenSource().Token))
+            if(bleTask.Wait(30000, new CancellationTokenSource().Token))
             {
                 selectedBLEDev = bleTask.Result;
                 
@@ -51,19 +51,20 @@ namespace BluetoothLEBatteryMonitor.Service
                     if (GattCommunicationStatus.Success.Equals(batteryServiceTask.Result.Status)){
                         selectGattService = batteryServiceTask.Result.Services[0];
                         Task<GattCharacteristicsResult> gattCharacteristicsTask = selectGattService.GetCharacteristicsForUuidAsync(BATTERY_LEVEL_UUID, BluetoothCacheMode.Uncached).AsTask();
-                        if(gattCharacteristicsTask.Wait(300))
+                        if(gattCharacteristicsTask.Wait(3000))
                         {
                             if (GattCommunicationStatus.Success.Equals(gattCharacteristicsTask.Result.Status))
                             {
                                 selectGattCharacteristic = gattCharacteristicsTask.Result.Characteristics[0];
                                 form.Notify("BLE Device ID:" + selectedBLEDev.DeviceId);
                                 form.StartUpdate();
+                                return;
                             }
                         }
                     }
                 }
-
             }
+            form.Notify("Device connect timeout, please retry to select device!");
         }
 
         public int GetBatteryLevel()
