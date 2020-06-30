@@ -44,7 +44,6 @@ namespace BluetoothLEBatteryMonitor.Service
             if(bleTask.Wait(30000, new CancellationTokenSource().Token))
             {
                 selectedBLEDev = bleTask.Result;
-                
                 Task<GattDeviceServicesResult> batteryServiceTask = selectedBLEDev.GetGattServicesForUuidAsync(BATTERY_UUID, BluetoothCacheMode.Uncached).AsTask();
                 if(batteryServiceTask.Wait(3000))
                 {

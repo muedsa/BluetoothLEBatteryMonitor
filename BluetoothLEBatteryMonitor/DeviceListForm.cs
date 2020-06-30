@@ -52,6 +52,7 @@ namespace BluetoothLEBatteryMonitor
                     };
                     listViewItem.SubItems.Add(devInfo.Pairing.IsPaired ? "Paired " : "Unpair");
                     listViewItem.SubItems.Add(devInfo.Id);
+                    listViewItem.Tag = devInfo;
                     this.DeviceListView.Items.Add(listViewItem);
                 }
                 DeviceListView.EndUpdate();
@@ -60,8 +61,14 @@ namespace BluetoothLEBatteryMonitor
 
         private void DeviceListView_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string id = DeviceListView.SelectedItems[0].SubItems[2].Text;
-            DeviceManager.Instance.SelectDevice(id, this);
+            if(DeviceListView.SelectedItems.Count > 0)
+            {
+                DeviceListView.Enabled = false;
+                DeviceInformation devInfo = (DeviceInformation)DeviceListView.SelectedItems[0].Tag;
+                DeviceManager.Instance.SelectDevice(devInfo.Id, this);
+                DeviceListView.Enabled = true;
+            }
+            
         }
 
         private void IconTimer_Tick(object sender, EventArgs e)
