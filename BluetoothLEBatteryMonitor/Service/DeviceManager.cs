@@ -48,12 +48,17 @@ namespace BluetoothLEBatteryMonitor.Service
                 Task<GattDeviceServicesResult> batteryServiceTask = selectedBLEDev.GetGattServicesForUuidAsync(BATTERY_UUID, BluetoothCacheMode.Uncached).AsTask();
                 if(batteryServiceTask.Wait(3000))
                 {
-                    if (GattCommunicationStatus.Success.Equals(batteryServiceTask.Result.Status)){
+                    if (GattCommunicationStatus.Success.Equals(batteryServiceTask.Result.Status) 
+                        && batteryServiceTask.Result.Services != null
+                        && batteryServiceTask.Result.Services.Count > 0)
+                    {
                         selectGattService = batteryServiceTask.Result.Services[0];
                         Task<GattCharacteristicsResult> gattCharacteristicsTask = selectGattService.GetCharacteristicsForUuidAsync(BATTERY_LEVEL_UUID, BluetoothCacheMode.Uncached).AsTask();
                         if(gattCharacteristicsTask.Wait(3000))
                         {
-                            if (GattCommunicationStatus.Success.Equals(gattCharacteristicsTask.Result.Status))
+                            if (GattCommunicationStatus.Success.Equals(gattCharacteristicsTask.Result.Status)
+                                && gattCharacteristicsTask.Result.Characteristics != null 
+                                && gattCharacteristicsTask.Result.Characteristics.Count > 0)
                             {
                                 selectGattCharacteristic = gattCharacteristicsTask.Result.Characteristics[0];
                                 form.Notify("BLE Device ID:" + selectedBLEDev.DeviceId);
