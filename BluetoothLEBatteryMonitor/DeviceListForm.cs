@@ -66,45 +66,52 @@ namespace BluetoothLEBatteryMonitor
 
         private void IconTimer_Tick(object sender, EventArgs e)
         {
-            ChangeIcon(DeviceManager.Instance.GetDeviceName(), DeviceManager.Instance.GetBatteryLevel());
+            ChangeIcon(DeviceManager.Instance.GetDeviceName(), DeviceManager.Instance.GetBatteryLevel(this));
         }
 
         private void ChangeIcon(string name, int battery)
         {
             if (battery >= 90)
             {
-                this.NotifyIcon.Icon = BluetoothLEBatteryMonitor.Properties.Resources.Icon_Battery_Full;
+                NotifyIcon.Icon = BluetoothLEBatteryMonitor.Properties.Resources.Icon_Battery_Full;
             }
             else if (battery >= 70)
             {
-                this.NotifyIcon.Icon = BluetoothLEBatteryMonitor.Properties.Resources.Icon_Battery_Three_Quarters;
+                NotifyIcon.Icon = BluetoothLEBatteryMonitor.Properties.Resources.Icon_Battery_Three_Quarters;
             }
             else if (battery >= 50)
             {
-                this.NotifyIcon.Icon = BluetoothLEBatteryMonitor.Properties.Resources.Icon_Battery_Half;
+                NotifyIcon.Icon = BluetoothLEBatteryMonitor.Properties.Resources.Icon_Battery_Half;
             }
             else if (battery >= 30)
             {
-                this.NotifyIcon.Icon = BluetoothLEBatteryMonitor.Properties.Resources.Icon_Battery_Quarter;
+                NotifyIcon.Icon = BluetoothLEBatteryMonitor.Properties.Resources.Icon_Battery_Quarter;
             }
             else if(battery > 0)
             {
-                this.NotifyIcon.Icon = BluetoothLEBatteryMonitor.Properties.Resources.Icon_Battery_Empty;
+                NotifyIcon.Icon = BluetoothLEBatteryMonitor.Properties.Resources.Icon_Battery_Empty;
             }
             else
             {
+                NotifyIcon.Icon = BluetoothLEBatteryMonitor.Properties.Resources.Icon_Battery_Three_Quarters;
+                NotifyIcon.Text = "BluetoothLE Battery Monitor";
                 return;
             }
-            this.NotifyIcon.Text = String.Format("{0} {1}%\n{2} Update", name, battery, DateTime.Now.ToString());
+            NotifyIcon.Text = String.Format("{0} {1}%\n{2} Update", name, battery, DateTime.Now.ToString());
         }
 
         public void StartUpdate()
         {
             Hide();
             IconTimer.Start();
-            ChangeIcon(DeviceManager.Instance.GetDeviceName(), DeviceManager.Instance.GetBatteryLevel());
+            ChangeIcon(DeviceManager.Instance.GetDeviceName(), DeviceManager.Instance.GetBatteryLevel(this));
         }
 
+        public void StopUpdate()
+        {
+            Notify("BLE device disconnect");
+            IconTimer.Stop();
+        }
 
         public void Notify(string message)
         {

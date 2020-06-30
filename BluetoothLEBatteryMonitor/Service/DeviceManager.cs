@@ -67,7 +67,7 @@ namespace BluetoothLEBatteryMonitor.Service
             form.Notify("Device connect timeout, please retry to select device!");
         }
 
-        public int GetBatteryLevel()
+        public int GetBatteryLevel(DeviceListForm form)
         {
             if(selectGattCharacteristic != null && BluetoothConnectionStatus.Connected.Equals(selectedBLEDev.ConnectionStatus))
             {
@@ -83,6 +83,10 @@ namespace BluetoothLEBatteryMonitor.Service
                     }
                 }
             }
+            form.StopUpdate();
+            selectedBLEDev = null;
+            selectGattService = null;
+            selectGattCharacteristic = null;
             return -1;
         }
 
