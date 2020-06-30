@@ -93,7 +93,7 @@ namespace BluetoothLEBatteryMonitor
             }
             else
             {
-                NotifyIcon.Icon = BluetoothLEBatteryMonitor.Properties.Resources.Icon_Battery_Three_Quarters;
+                NotifyIcon.Icon = BluetoothLEBatteryMonitor.Properties.Resources.Icon_Unlink;
                 NotifyIcon.Text = "BluetoothLE Battery Monitor";
                 return;
             }
