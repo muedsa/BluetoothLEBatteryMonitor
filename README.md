@@ -5,6 +5,8 @@ Version 2.0
 ![screenshot2](https://github.com/MUedsa/BluetoothLEBatteryMonitor/blob/v2.0/screenshot2.png?raw=true)  
 # Note
 Use Universal Windows Platform (UWP) Windows Runtime API at Windows Forms  
+# TODO 
+- BEL: Replace timer loop to get BatteryLevel whit event listener  
 
 # References
 - https://github.com/joric/bluetooth-battery-monitor
