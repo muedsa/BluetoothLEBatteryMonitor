@@ -1,3 +1,6 @@
+# Note
+I try to get Bluetooh headphone battery level by BLE GattService, but this is not a good idea.
+
 ## Win10 20H2 support for Battery Monitor  
 ![Win10 2020H2 devices](https://github.com/MUedsa/BluetoothLEBatteryMonitor/blob/v2.0/win10%2020H2%20devices.png?raw=true)  
 
