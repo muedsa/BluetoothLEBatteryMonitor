@@ -1,13 +1,13 @@
 # First
 The project use a wrong way to get battery level(Headphone/Headset)  
 I try to get Bluetooh headphone battery level  by BLE GattService, but this is not a good idea.  
+
+# For headphone/headset 
 Headphone/Headset can use HFP to report battery level to ios.  
 [Apple](https://developer.apple.com/accessories/Accessory-Design-Guidelines.pdf) extend HFP command, help headset report a headset state change:  
 - Request: AT+XAPL=[vendorID]-[productID]-[version],[features]
 - Response: AT+IPHONEACCEV=[Number of key/value pairs ],[key1 ],[val1 ],[key2 ],[val2 ],...
 
-## Win10 20H2 support for Battery Monitor  
-![Win10 2020H2 devices](https://github.com/MUedsa/BluetoothLEBatteryMonitor/blob/v2.0/win10%2020H2%20devices.png?raw=true)  
 
 # BluetoothLEBatteryMonitor
 Windows BluetoothLE Battery Monitor  
