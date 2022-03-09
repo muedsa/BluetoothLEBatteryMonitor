@@ -9,7 +9,7 @@ Headphone/Headset can use HFP to report battery level to ios.We should use hfp t
 - Response: AT+IPHONEACCEV=[Number of key/value pairs ],[key1 ],[val1 ],[key2 ],[val2 ],...  
 
 
-Unfortunately, microsoft no provide a api. You have to code Bluetooth Driver to supersed Microsoft Driver.  
+Unfortunately, microsoft no provide api. You have to code Bluetooth Driver to supersed Microsoft Driver.  
 
 
 # BluetoothLEBatteryMonitor
