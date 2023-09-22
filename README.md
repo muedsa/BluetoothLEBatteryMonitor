@@ -6,6 +6,8 @@ use **Battery Percents Properties**
 
 `Data` is in percents
 
+Look the [PowerShell Script](https://gist.github.com/muedsa/d5a94e2d5827d3b518063b9a2d2fdda3)
+
 # Note
 The project use a wrong way to get battery level(Headphone/Headset)  
 I try to get Bluetooh headphone battery level  by BLE GattService, but this is not a good idea.  
