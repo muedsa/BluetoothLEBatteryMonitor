@@ -1,4 +1,12 @@
-# First
+# For Windows Developer
+Google `Windows Management Interface`.  
+use **Battery Percents Properties**
+- Key = {104EA319-6EE2-4701-BD47-8DDBF425BBE5} 2
+- Type = 3 (Byte)
+
+`Data` is in percents
+
+# Note
 The project use a wrong way to get battery level(Headphone/Headset)  
 I try to get Bluetooh headphone battery level  by BLE GattService, but this is not a good idea.  
 
