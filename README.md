@@ -1,7 +1,7 @@
 # For Windows Developer
 Google `Windows Management Interface`.  
 use **Battery Percents Properties**
-- Key = {104EA319-6EE2-4701-BD47-8DDBF425BBE5} 2
+- Key = `{104EA319-6EE2-4701-BD47-8DDBF425BBE5} 2`
 - Type = 3 (Byte)
 
 `Data` is in percents
